@@ -5,7 +5,7 @@ const Header = () => {
     <div
       style={{
         display: "flex",
-        flexDirection: "row",
+        justifyContent: "space-between",
         alignItems: "center",
         padding: "20px",
         backgroundColor: "#fff",
@@ -14,53 +14,41 @@ const Header = () => {
         margin: "20px 0",
       }}
     >
-      {/* Zdjęcie produktu */}
-      <img
-        src="zdj.png" // Zmień na prawdziwy link do zdjęcia produktu
-        alt="Product"
-        style={{
-          width: "350px",
-          // height: "150px",
-          objectFit: "cover",
-          borderRadius: "8px",
-          marginRight: "20px",
-        }}
-      />
-
-      {/* Informacje o produkcie */}
-      <div style={{ flex: 1 }}>
-        <h2
+      {/* Lewa strona: QR Code */}
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <img
+          src="https://quickchart.io/qr?text=Digital+Product+Passport&size=150" // Działający QR Code API
+          alt="QR Code"
           style={{
-            margin: 0,
-            fontSize: "24px",
+            width: "100px",
+            height: "100px",
+            marginRight: "20px",
+            borderRadius: "8px",
+          }}
+        />
+      </div>
+
+      {/* Środkowa część: Duży napis */}
+      <div
+        style={{
+          textAlign: "center",
+          flex: 1,
+        }}
+      >
+        <h1
+          style={{
+            fontSize: "32px",
             fontWeight: "bold",
+            margin: 0,
             color: "#2E7D32",
           }}
         >
-          ECOPLASTOMER
-        </h2>
-        <p style={{ margin: "10px 0", fontSize: "16px" }}>
-          <strong>GTIN:</strong> 5906924338005
-        </p>
-        <p style={{ margin: "10px 0", fontSize: "16px" }}>
-          <strong>Product Name:</strong>{" "}
-          <span style={{ color: "#2E7D32", fontWeight: "bold" }}>
-            ECOPLASTOMER PP 70 800kg
-          </span>
-        </p>
-        <p style={{ margin: "10px 0", fontSize: "16px" }}>
-          <strong>Category:</strong> ECOPLASTOMER
-        </p>
-        <p style={{ margin: "10px 0", fontSize: "16px" }}>
-          <strong>Serial Number:</strong> -
-        </p>
-        <p style={{ margin: "10px 0", fontSize: "16px" }}>
-          <strong>Colour:</strong> -
-        </p>
-        <p style={{ margin: "10px 0", fontSize: "16px" }}>
-          <strong>Production date:</strong> -
-        </p>
+          Digital Product Passport
+        </h1>
       </div>
+
+      {/* Pusta przestrzeń po prawej stronie */}
+      <div style={{ width: "100px" }}></div>
     </div>
   );
 };
