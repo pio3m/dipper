@@ -14,19 +14,11 @@ const Header = () => {
         margin: "20px 0",
       }}
     >
+      {/* Pusta przestrzeń po lewej stronie */}
+      <div style={{ width: "100px" }}></div>
+
       {/* Lewa strona: QR Code */}
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <img
-          src="https://quickchart.io/qr?text=Digital+Product+Passport&size=150" // Działający QR Code API
-          alt="QR Code"
-          style={{
-            width: "100px",
-            height: "100px",
-            marginRight: "20px",
-            borderRadius: "8px",
-          }}
-        />
-      </div>
+     
 
       {/* Środkowa część: Duży napis */}
       <div
@@ -46,9 +38,18 @@ const Header = () => {
           Digital Product Passport
         </h1>
       </div>
-
-      {/* Pusta przestrzeń po prawej stronie */}
-      <div style={{ width: "100px" }}></div>
+      <div style={{ display: "flex", alignItems: "center", marginLeft: "auto" }}>
+        <img
+          src="https://quickchart.io/qr?text=Digital+Product+Passport&size=150" // Działający QR Code API
+          alt="QR Code"
+          style={{
+            width: "100px",
+            height: "100px",
+            marginRight: "20px",
+            borderRadius: "8px",
+          }}
+        />
+      </div>
     </div>
   );
 };

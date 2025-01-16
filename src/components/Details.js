@@ -21,7 +21,7 @@ const Details = () => {
       >
         Company Information
       </h3>
-      <div style={{ marginBottom: "10px", fontSize: "16px" }}>
+      <div style={{ marginBottom: "10px", fontSize: "20px" }}>
         <p style={{ margin: "10px 0" }}>
           <strong>Company:</strong> Ecopolplast Sp z.o.o
         </p>

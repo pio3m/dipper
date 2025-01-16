@@ -13,24 +13,25 @@ const TopBar = () => {
       }}
     >
       {/* Logo */}
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <img
-          src="ecoplast.png" // Upewnij się, że plik `ecoplast.png` znajduje się w folderze public lub src
+          src="ecoplast.png" 
           alt="Ecopolplast Logo"
           style={{
             width: "120px",
             height: "auto",
-            marginRight: "15px",
+            marginBottom: "5px",
           }}
         />
         <span
           style={{
-            fontSize: "16px",
+            fontSize: "14px",
             fontWeight: "bold",
-            color: "#2E7D32",
+            color: "grey",
+            textAlign: "center",
           }}
         >
-          Powered by DiPPer
+          Powered by <span style={{ fontSize: "16px", color: "green" }}>DiPPer</span>
         </span>
       </div>
 
