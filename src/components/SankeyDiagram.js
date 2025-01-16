@@ -1,15 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import { sankey, sankeyLinkHorizontal } from "d3-sankey";
+import { useTheme } from "./ThemeContext";
 
 const SankeyDiagram = () => {
   const svgRef = useRef();
+  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     const width = 800;
     const height = 400;
 
-    // Dane dla Sankey Diagram
     const data = {
       nodes: [
         { name: "Circular TPE" },
@@ -18,13 +19,11 @@ const SankeyDiagram = () => {
         { name: "Final Product" },
       ],
       links: [
-        // { source: 0, target: 3, value: 100, material: "100% recycled materials" },
         { source: 1, target: 3, value: 70, material: "70% polypropylene" },
         { source: 2, target: 3, value: 30, material: "30% recycled tire rubber" },
       ],
     };
 
-    // Generator Sankey
     const sankeyGenerator = sankey()
       .nodeWidth(60)
       .nodePadding(60)
@@ -38,16 +37,13 @@ const SankeyDiagram = () => {
       links: data.links.map((d) => ({ ...d })),
     });
 
-    // Tworzenie SVG
     const svg = d3
       .select(svgRef.current)
       .attr("width", width)
       .attr("height", height);
 
-    // Czyszczenie SVG
     svg.selectAll("*").remove();
 
-    // Rysowanie linków
     svg
       .append("g")
       .selectAll("path")
@@ -59,7 +55,6 @@ const SankeyDiagram = () => {
       .attr("stroke-width", (d) => Math.max(1, d.width))
       .attr("opacity", 0.8);
 
-    // Dodawanie etykiet do linków
     svg
       .append("g")
       .selectAll("text")
@@ -69,10 +64,9 @@ const SankeyDiagram = () => {
       .attr("y", (d) => (d.source.y0 + d.source.y1) / 2)
       .attr("text-anchor", "middle")
       .attr("font-size", "12px")
-      .attr("fill", "#555")
+      .attr("fill", isDarkMode ? "#ddd" : "#555")
       .text((d) => d.material);
 
-    // Rysowanie węzłów
     svg
       .append("g")
       .selectAll("rect")
@@ -83,9 +77,8 @@ const SankeyDiagram = () => {
       .attr("width", (d) => d.x1 - d.x0)
       .attr("height", (d) => d.y1 - d.y0)
       .attr("fill", (d, i) => d3.schemeCategory10[i % 10])
-      .attr("stroke", "#333");
+      .attr("stroke", isDarkMode ? "#ddd" : "#333");
 
-    // Dodawanie etykiet do węzłów
     svg
       .append("g")
       .selectAll("text")
@@ -95,15 +88,16 @@ const SankeyDiagram = () => {
       .attr("y", (d) => d.y0 - 10)
       .attr("text-anchor", "middle")
       .attr("font-size", "14px")
-      .attr("fill", "#333")
+      .attr("fill", isDarkMode ? "#ddd" : "#333")
       .text((d) => d.name);
-  }, []);
+  }, [isDarkMode]);
 
   return (
     <div
       style={{
         padding: "20px",
-        backgroundColor: "#fff",
+        backgroundColor: isDarkMode ? "#333" : "#fff",
+        color: isDarkMode ? "#fff" : "#000",
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         borderRadius: "8px",
         margin: "20px 0",
@@ -114,7 +108,7 @@ const SankeyDiagram = () => {
           fontSize: "20px",
           fontWeight: "bold",
           marginBottom: "20px",
-          color: "#2E7D32",
+          color: isDarkMode ? "#90caf9" : "#2E7D32",
         }}
       >
         Material Flow

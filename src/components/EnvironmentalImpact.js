@@ -1,6 +1,9 @@
 import React from "react";
+import { useTheme } from "./ThemeContext";
 
 const EnvironmentalImpact = () => {
+  const { isDarkMode } = useTheme();
+
   const impactData = [
     { label: "Water consumption, per unit", value: "50 liters" },
     { label: "Recycled content, in %", value: "84%" },
@@ -14,7 +17,8 @@ const EnvironmentalImpact = () => {
     <div
       style={{
         padding: "20px",
-        backgroundColor: "#fff",
+        backgroundColor: isDarkMode ? "#333" : "#fff",
+        color: isDarkMode ? "#fff" : "#000",
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         borderRadius: "8px",
         margin: "20px 0",
@@ -26,12 +30,18 @@ const EnvironmentalImpact = () => {
           fontSize: "20px",
           fontWeight: "bold",
           marginBottom: "20px",
-          color: "#2E7D32",
+          color: isDarkMode ? "#90caf9" : "#2E7D32",
         }}
       >
         Environmental Impact
       </h3>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px" }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "15px",
+        }}
+      >
         {impactData.map((item, index) => (
           <div
             key={index}
@@ -40,16 +50,18 @@ const EnvironmentalImpact = () => {
               flexDirection: "column",
               alignItems: "center",
               padding: "10px",
-              backgroundColor: "#f9f9f9",
+              backgroundColor: isDarkMode ? "#444" : "#f9f9f9",
               borderRadius: "8px",
-              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+              boxShadow: isDarkMode
+                ? "0 2px 4px rgba(0, 0, 0, 0.3)"
+                : "0 2px 4px rgba(0, 0, 0, 0.1)",
             }}
           >
             <p
               style={{
                 fontSize: "14px",
                 fontWeight: "bold",
-                color: "#333",
+                color: isDarkMode ? "#ccc" : "#333",
                 margin: "0 0 5px",
               }}
             >
@@ -59,7 +71,7 @@ const EnvironmentalImpact = () => {
               style={{
                 fontSize: "16px",
                 fontWeight: "bold",
-                color: "#2E7D32",
+                color: isDarkMode ? "#90caf9" : "#2E7D32",
                 margin: 0,
               }}
             >

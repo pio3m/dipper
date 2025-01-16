@@ -1,6 +1,9 @@
 import React from "react";
+import { useTheme } from "./ThemeContext";
 
 const TopBar = () => {
+  const { isDarkMode, toggleTheme } = useTheme(); // Pobieramy tryb i funkcję zmiany skórki
+
   return (
     <div
       style={{
@@ -8,14 +11,15 @@ const TopBar = () => {
         justifyContent: "space-between",
         alignItems: "center",
         padding: "10px 20px",
-        backgroundColor: "#f4f4f4",
+        backgroundColor: isDarkMode ? "#333" : "#f4f4f4", // Tło dynamicznie zmieniane
+        color: isDarkMode ? "#fff" : "#000",
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
       }}
     >
       {/* Logo */}
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <img
-          src="ecoplast.png" 
+          src="ecoplast.png"
           alt="Ecopolplast Logo"
           style={{
             width: "120px",
@@ -27,11 +31,11 @@ const TopBar = () => {
           style={{
             fontSize: "14px",
             fontWeight: "bold",
-            color: "grey",
             textAlign: "center",
+            color: isDarkMode ? "#90caf9" : "grey", // Kolor dynamicznie zmieniany
           }}
         >
-          Powered by <span style={{ fontSize: "16px", color: "green" }}>DiPPer</span>
+          Powered by <span style={{ fontSize: "16px", color: isDarkMode ? "#90caf9" : "green" }}>DiPPer</span>
         </span>
       </div>
 
@@ -77,6 +81,29 @@ const TopBar = () => {
         >
           DIGITAL LINK GS1
         </a>
+        {/* Przycisk przełączania trybu */}
+        <button
+          onClick={toggleTheme}
+          style={{
+            textDecoration: "none",
+            padding: "10px 20px",
+            color: isDarkMode ? "#000" : "#fff",
+            backgroundColor: isDarkMode ? "#90caf9" : "#4CAF50",
+            borderRadius: "5px",
+            fontWeight: "bold",
+            border: "none",
+            cursor: "pointer",
+            transition: "all 0.3s ease",
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = isDarkMode ? "#78bce2" : "#3e8e41";
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = isDarkMode ? "#90caf9" : "#4CAF50";
+          }}
+        >
+          {isDarkMode ? "Light Mode" : "Dark Mode"}
+        </button>
       </div>
     </div>
   );

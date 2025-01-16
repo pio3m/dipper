@@ -1,6 +1,9 @@
 import React from "react";
+import { useTheme } from "./ThemeContext";
 
 const Header = () => {
+  const { isDarkMode, toggleTheme } = useTheme(); // Pobranie trybu i funkcji zmiany trybu
+
   return (
     <div
       style={{
@@ -8,7 +11,8 @@ const Header = () => {
         justifyContent: "space-between",
         alignItems: "center",
         padding: "20px",
-        backgroundColor: "#fff",
+        backgroundColor: isDarkMode ? "#333" : "#fff",
+        color: isDarkMode ? "#fff" : "#000",
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         borderRadius: "8px",
         margin: "20px 0",
@@ -16,9 +20,6 @@ const Header = () => {
     >
       {/* Pusta przestrzeń po lewej stronie */}
       <div style={{ width: "100px" }}></div>
-
-      {/* Lewa strona: QR Code */}
-     
 
       {/* Środkowa część: Duży napis */}
       <div
@@ -32,20 +33,22 @@ const Header = () => {
             fontSize: "32px",
             fontWeight: "bold",
             margin: 0,
-            color: "#2E7D32",
+            color: isDarkMode ? "#90caf9" : "#2E7D32",
           }}
         >
           Digital Product Passport
         </h1>
       </div>
+
+      {/* Prawa strona: QR Code i przełącznik */}
       <div style={{ display: "flex", alignItems: "center", marginLeft: "auto" }}>
+        
         <img
-          src="https://quickchart.io/qr?text=Digital+Product+Passport&size=150" // Działający QR Code API
+          src="https://quickchart.io/qr?text=Digital+Product+Passport&size=150"
           alt="QR Code"
           style={{
             width: "100px",
             height: "100px",
-            marginRight: "20px",
             borderRadius: "8px",
           }}
         />

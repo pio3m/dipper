@@ -1,25 +1,29 @@
 import React from "react";
 import { PieChart, Pie, Cell, Tooltip } from "recharts";
+import { useTheme } from "./ThemeContext";
 
 const Charts = () => {
-  // Dane wykresu składu materiałowego
+  const { isDarkMode } = useTheme();
+
   const materialCompositionData = [
-    { name: "Polypropylene", value: 90 }, // 90% polipropylen
-    { name: "Recycled Tire Rubber", value: 10 }, // 10% guma z recyklingu
+    { name: "Polypropylene", value: 90 },
+    { name: "Recycled Tire Rubber", value: 10 },
   ];
 
-  // Kolory wykresu
-  const COLORS = ["#4CAF50", "#FF9800"]; // Zielony dla polipropylenu, pomarańczowy dla gumy
+  const COLORS = ["#4CAF50", "#FF9800"];
 
   return (
     <div
       style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
         padding: "20px",
-        backgroundColor: "#fff",
+        backgroundColor: isDarkMode ? "#333" : "#fff",
+        color: isDarkMode ? "#fff" : "#000",
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         borderRadius: "8px",
         margin: "20px 0",
-        textAlign: "center",
       }}
     >
       <h3
@@ -27,45 +31,41 @@ const Charts = () => {
           fontSize: "20px",
           fontWeight: "bold",
           marginBottom: "20px",
-          color: "#2E7D32",
+          color: isDarkMode ? "#90caf9" : "#2E7D32",
         }}
       >
         Material Composition
       </h3>
 
-      {/* Wykres składu materiałowego */}
-      <div style={{ textAlign: "center" }}>
-        <PieChart width={240} height={240}>
-          <Pie
-            data={materialCompositionData}
-            dataKey="value"
-            nameKey="name"
-            cx="50%"
-            cy="50%"
-            outerRadius={90}
-            fill="#8884d8"
-          >
-            {materialCompositionData.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
-          <Tooltip />
-        </PieChart>
-        <p
-          style={{
-            fontSize: "20px",
-            fontWeight: "bold",
-            color: "#4CAF50",
-          }}
+      <PieChart width={240} height={240}>
+        <Pie
+          data={materialCompositionData}
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="50%"
+          outerRadius={90}
         >
-          90% Polypropylene, 10% Recycled Tire Rubber
-        </p>
-      </div>
+          {materialCompositionData.map((entry, index) => (
+            <Cell
+              key={`cell-${index}`}
+              fill={COLORS[index % COLORS.length]}
+            />
+          ))}
+        </Pie>
+        <Tooltip />
+      </PieChart>
+      <p
+        style={{
+          fontSize: "20px",
+          fontWeight: "bold",
+          color: isDarkMode ? "#90caf9" : "#4CAF50",
+          marginTop: "20px",
+        }}
+      >
+        90% Polypropylene, 10% Recycled Tire Rubber
+      </p>
 
-      {/* Szczegółowe dane */}
       <div
         style={{
           marginTop: "30px",
