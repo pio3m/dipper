@@ -1,20 +1,20 @@
 import React from "react";
 import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
 
+// Alternatywne źródło danych
 const geoUrl =
-  "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/poland/poland.json";
+  "https://raw.githubusercontent.com/markmarkoh/datamaps/master/src/js/data/pol.json";
 
 const Map = () => {
-  // Lokalizacje z tooltipami
   const locations = [
     {
       name: "Warszawa",
-      coordinates: [21.0122, 52.2297], // Longitude, Latitude
+      coordinates: [21.0122, 52.2297],
       description: "Dystrybucja produktu",
     },
     {
       name: "Lębork",
-      coordinates: [17.7500, 54.5333], // Longitude, Latitude
+      coordinates: [17.7500, 54.5333],
       description: "Produkcja produktu",
     },
     {
@@ -48,14 +48,13 @@ const Map = () => {
       <ComposableMap
         projection="geoMercator"
         projectionConfig={{
-          center: [19, 52], // Centrum Polski
+          center: [19, 52],
           scale: 2500,
         }}
         width={800}
         height={500}
         style={{ width: "100%", height: "auto" }}
       >
-        {/* Import geometrii Polski */}
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
             geographies.map((geo) => (
@@ -80,8 +79,6 @@ const Map = () => {
             ))
           }
         </Geographies>
-
-        {/* Markery */}
         {locations.map(({ name, coordinates, description }) => (
           <Marker key={name} coordinates={coordinates}>
             <circle r={6} fill="#FF5722" stroke="#fff" strokeWidth={2} />
@@ -96,7 +93,7 @@ const Map = () => {
             >
               {name}
             </text>
-            <title>{description}</title> {/* Tooltip */}
+            <title>{description}</title>
           </Marker>
         ))}
       </ComposableMap>

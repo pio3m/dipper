@@ -20,6 +20,7 @@ const App = () => (
     <LifeCycleAssessment />
 
     <SankeyDiagram />
+    <Map />
   </div>
 );
 
